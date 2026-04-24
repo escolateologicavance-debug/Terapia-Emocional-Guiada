@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>5.html - Luto: A Travessia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --gray-deep: #455a64;
+    --spirit-blue: #0b3d91;
+    --gold: #f1c40f; /* Cor da reconstrução */
+    --soft-bg: #fdfdfd;
+  }
+
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #eceff1; color: #333; margin: 0; padding: 20px; }
+  h2 { color: var(--gray-deep); text-align: center; margin-bottom: 5px; }
+  .tagline { font-size: 0.9em; color: #666; text-align: center; margin-bottom: 20px; }
+
+  .card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  /* --- NOVA ANIMAÇÃO DE RECONSTRUÇÃO --- */
+  .animation-container {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 20px 0;
+  }
+
+  /* Vaso Simbólico */
+  .vessel {
+    width: 60px;
+    height: 100px;
+    border: 5px solid var(--spirit-blue);
+    border-top: none;
+    position: relative;
+    transition: all 4s ease-in-out;
+  }
+
+  .vessel-part {
+    width: 30px;
+    height: 100px;
+    border: 5px solid var(--spirit-blue);
+    border-top: none;
+    position: absolute;
+    bottom: 0;
+    transition: all 4s ease-in-out;
+  }
+
+  .vessel-left {
+    left: calc(50% - 60px);
+    border-right: none;
+    border-radius: 30px 0 0 30px;
+  }
+
+  .vessel-right {
+    right: calc(50% - 60px);
+    border-left: none;
+    border-radius: 0 30px 30px 0;
+  }
+
+  /* Fenda Dourada que Preenche */
+  .golden-fill {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0px;
+    height: 90px;
+    background: linear-gradient(180deg, rgba(241,196,15,0.8) 0%, var(--gold) 100%);
+    transition: all 4s ease-in-out;
+    border-radius: 5px;
+    opacity: 0;
+  }
+
+  /* ESTADO DE ROMPIMENTO (Começa assim) */
+  .vessel-left.broken {
+    transform: rotate(-15deg);
+    left: calc(50% - 65px);
+  }
+
+  .vessel-right.broken {
+    transform: rotate(15deg);
+    right: calc(50% - 65px);
+  }
+
+  /* ESTADO DE RECONSTRUÇÃO (Transição) */
+  .reconstructing .vessel-part {
+    transform: rotate(0deg);
+  }
+  .reconstructing .vessel-left { left: calc(50% - 30px); }
+  .reconstructing .vessel-right { right: calc(50% - 30px); }
+  
+  .reconstructing .golden-fill {
+    width: 10px;
+    opacity: 1;
+  }
+
+  /* --- FIM DA NOVA ANIMAÇÃO --- */
+
+  .clinical-info { font-size: 1.05em; line-height: 1.6; color: #333; text-align: left; }
+  .clinical-info b { color: var(--spirit-blue); display: block; margin-bottom: 5px; }
+  .pathology-note { background: #ffebee; border-left: 4px solid #c62828; padding: 15px; margin: 15px 0; font-style: italic; font-weight: 500; border-radius: 0 10px 10px 0; }
+  .section-divider { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
+
+  .check-item { display: flex; align-items: center; margin: 15px 0; font-size: 1.1em; }
+  .check-item input { width: 24px; height: 24px; margin-right: 15px; cursor: pointer; }
+
+  .btn {
+    width: 100%; padding: 18px; margin-top: 10px; border: none; border-radius: 10px;
+    font-size: 16px; font-weight: bold; cursor: pointer;
+  }
+  .btn-send { background: #128c7e; color: white; }
+  .btn-back { background: #78909c; color: white; }
+</style>
+</head>
+
+<body>
+
+<h2>Luto</h2>
+<p class="tagline">Alinhamento: Corpo, Alma e Espírito</p>
+
+<div class="card" style="text-align: center;">
+  <p><b>Processo de Travessia e Reconstrução</b></p>
+  <div id="animGroup" class="animation-container">
+    <div class="vessel-part vessel-left broken"></div>
+    <div class="vessel-part vessel-right broken"></div>
+    <div class="golden-fill"></div>
+  </div>
+  <button class="btn" style="padding:10px; background:#ddd; color:#333; width:auto; font-size:14px;" onclick="triggerReconstruction()">Simular Tempo/Reconstrução</button>
+  <p style="font-size: 0.9em; color: #666; margin-top: 10px;">A dor não desaparece; ela se transforma em uma nova força.</p>
+</div>
+
+<div class="card">
+  <p style="font-size: 1.2em; font-weight: bold; color: var(--gray-deep); margin-top: 0;">O Processo de Travessia:</p>
+  
+  <div class="clinical-info">
+    <p>
+      <b>1. Corpo (Resposta ao Estresse Traumático):</b> 
+      O luto gera um estado de alerta biológico severo. O cérebro processa a perda como uma ameaça à sobrevivência, desregulando o apetite, o peso e derrubando o sistema imunológico. 
+      <br><i>Ação:</i> Cuide do templo. Alimente-se de forma consciente e mantenha o mínimo de rotina física. O corpo precisa desse suporte biológico para sustentar o peso da alma.
+    </p>
+
+    <div class="section-divider"></div>
+
+    <p>
+      <b>2. Alma (O Processamento da Perda):</b> 
+      A tristeza e a angústia são respostas adaptativas normais. A alma precisa de tempo para reconstruir o mundo interno sem a presença física do outro. 
+      <br><i>Ação:</i> Valide sua dor. Não reprima o choro, mas não se perca na culpa. Organize as memórias: o que foi vivido permanece como legado de amor, não como uma corrente que o prende.
+    </p>
+
+    <div class="pathology-note">
+      <b>Atenção Clínica e Temporal:</b> O luto com tristeza e angústia é considerado normal de <b>seis meses até no máximo dois anos</b>. Após esse período, se a dor impedir a funcionalidade e o desejo de viver, torna-se <b>Luto Patológico</b> e requer tratamento clínico e espiritual intensivo para que a vida não estagne no passado.
+    </div>
+
+    <div class="section-divider"></div>
+
+    <p>
+      <b>3. Espiritual (A Eternidade no Agora):</b> 
+      O espírito vê além do véu da morte. O alinhamento espiritual permite entender que a separação é transitória e que a esperança não morre. 
+      <br><i>Ação:</i> Alinhe seu espírito com a gratidão pelo tempo que foi concedido. Pratique a entrega diária, reconhecendo que o fôlego de vida pertence ao Criador. A fé é o que transforma o "adeus" em "até breve".
+    </p>
+  </div>
+</div>
+
+<div class="card">
+  <p><b>Ações de Manutenção:</b></p>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="t1"><label>Falar sobre a perda com alguém</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="t2"><label>Honrar o legado (gesto prático)</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="t3"><label>Respeitar o tempo de silêncio</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="t4"><label>Alinhamento através da oração</label></div>
+</div>
+
+<button class="btn btn-send" onclick="enviar()">Relatar Status ao Terapeuta</button>
+<button class="btn btn-back" onclick="window.location.href='1.html'">Voltar ao Menu</button>
+
+<script>
+// Função para simular a animação (tempo passando)
+function triggerReconstruction() {
+  document.getElementById("animGroup").classList.add("reconstructing");
+}
+
+function salvar(){
+  let checks = [];
+  for(let i=1; i<=4; i++) checks.push(document.getElementById("t"+i).checked);
+  localStorage.setItem("data_5", JSON.stringify({
+    itens: checks
+  }));
+}
+
+window.onload = function(){
+  let dados = JSON.parse(localStorage.getItem("data_5"));
+  if(dados){
+    dados.itens.forEach((c, i) => { document.getElementById("t"+(i+1)).checked = c; });
+  }
+}
+
+function enviar(){
+  let realizados = [];
+  let labels = ["Conversa", "Legado", "Silêncio", "Oração"];
+  for(let i=1; i<=4; i++) if(document.getElementById("t"+i).checked) realizados.push(labels[i-1]);
+
+  let msg = `*RELATÓRIO CLÍNICO (5.html) - LUTO*\n*Status:* Processamento em curso\n*Concluído:* ${realizados.join(", ") || "Nenhum"}\n*Data:* ${new Date().toLocaleString()}`;
+  window.open(`https://wa.me/5566984666186?text=${encodeURIComponent(msg)}`, "_blank");
+}
+</script>
+
+</body>
+</html>

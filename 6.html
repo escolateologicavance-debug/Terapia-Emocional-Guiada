@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>6.html - Stress</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --stress-low: #27ae60;
+    --stress-med: #f39c12;
+    --stress-high: #e74c3c;
+    --spirit-blue: #0b3d91;
+    --bg: #f4f7f6;
+  }
+
+  body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #333; margin: 0; padding: 20px; }
+  h2 { color: var(--spirit-blue); text-align: center; margin-bottom: 5px; }
+  .tagline { font-size: 0.9em; color: #666; text-align: center; margin-bottom: 20px; }
+
+  .card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  }
+
+  /* ANIMAÇÃO DE TENSÃO (A Corda) */
+  .stress-visual {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tension-line {
+    width: 80%;
+    height: 4px;
+    background: var(--stress-low);
+    border-radius: 2px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  /* Efeito de vibração conforme a tensão aumenta */
+  @keyframes vibrate {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-2px); }
+    50% { transform: translateY(2px); }
+    75% { transform: translateY(-1px); }
+    100% { transform: translateY(0); }
+  }
+
+  .clinical-info { font-size: 1.05em; line-height: 1.6; color: #333; text-align: left; }
+  .clinical-info b { color: var(--spirit-blue); display: block; margin-bottom: 5px; }
+  .section-divider { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
+
+  .check-item { display: flex; align-items: center; margin: 15px 0; font-size: 1.1em; }
+  .check-item input { width: 24px; height: 24px; margin-right: 15px; cursor: pointer; }
+
+  .btn {
+    width: 100%; padding: 18px; margin-top: 10px; border: none; border-radius: 10px;
+    font-size: 16px; font-weight: bold; cursor: pointer;
+  }
+  .btn-send { background: #128c7e; color: white; }
+  .btn-back { background: #78909c; color: white; }
+</style>
+</head>
+
+<body>
+
+<h2>Stress</h2>
+<p class="tagline">Alinhamento: Corpo, Alma e Espírito</p>
+
+<div class="card" style="text-align: center;">
+  <p><b>Carga de Tensão Atual</b></p>
+  <div class="stress-visual">
+    <div id="line" class="tension-line"></div>
+  </div>
+  <input type="range" min="0" max="10" value="3" id="inputStress" style="width:100%" oninput="atualizarStress()">
+  <p id="statusLabel">Tensão Controlada</p>
+</div>
+
+<div class="card">
+  <p style="font-size: 1.2em; font-weight: bold; color: var(--spirit-blue); margin-top: 0;">Gestão da Resposta Biológica:</p>
+  
+  <div class="clinical-info">
+    <p>
+      <b>1. Corpo (O Eixo de Ataque ou Fuga):</b> 
+      O estresse é uma reação neuroendócrina. Em excesso, ele inunda o sangue com <b>Adrenalina</b>, elevando a pressão e tensionando a musculatura. Se essa corda não for afrouxada, o corpo quebra (fadiga crônica).
+      <br><i>Ação:</i> Pratique a descarga física. Atividade física intensa ou alongamentos profundos ajudam a "queimar" o excesso de adrenalina acumulada. O corpo precisa de um sinal físico de que a ameaça passou.
+    </p>
+
+    <div class="section-divider"></div>
+
+    <p>
+      <b>2. Alma (O Filtro da Percepção):</b> 
+      O estresse não é o que acontece com você, mas como você interpreta o que acontece. A mente acelerada cria cenários de catástrofe que sobrecarregam a psique desnecessariamente.
+      <br><i>Ação:</i> Hierarquize as demandas. O que é urgente, o que é importante e o que pode ser delegado? Aprenda a separar o que você pode controlar do que deve apenas aceitar. A paz mental nasce da organização das prioridades.
+    </p>
+
+    <div class="section-divider"></div>
+
+    <p>
+      <b>3. Espiritual (Soberania e Paz):</b> 
+      O estresse espiritual surge da tentativa de ser o senhor do próprio destino. A alma se cansa quando não descansa na soberania do Criador. 
+      <br><i>Ação:</i> Realinhe seu espírito através da oração de entrega. Lembre-se: "A cada dia basta o seu mal". Não tente resolver os problemas de amanhã com a energia de hoje. A gratidão é o freio de mão para a ansiedade do estresse.
+    </p>
+  </div>
+</div>
+
+<div class="card">
+  <p><b>Intervenções Clínicas:</b></p>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="s1"><label>Exercício físico (Descarga de Adrenalina)</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="s2"><label>Lista de tarefas (Priorização)</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="s3"><label>Pausa de 5 min (Silêncio total)</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="s4"><label>Alinhamento Espiritual (Entrega)</label></div>
+</div>
+
+<button class="btn btn-send" onclick="enviar()">Relatar ao Terapeuta</button>
+<button class="btn btn-back" onclick="window.location.href='1.html'">Voltar ao Menu</button>
+
+<script>
+function atualizarStress(){
+  let v = document.getElementById("inputStress").value;
+  let line = document.getElementById("line");
+  let label = document.getElementById("statusLabel");
+  
+  // Muda cor e vibração
+  if(v <= 4) {
+    line.style.background = "var(--stress-low)";
+    line.style.animation = "none";
+    line.style.height = "4px";
+    label.innerText = "Tensão Controlada";
+  } else if(v <= 7) {
+    line.style.background = "var(--stress-med)";
+    line.style.animation = "vibrate 0.2s infinite";
+    line.style.height = "6px";
+    label.innerText = "Estado de Alerta";
+  } else {
+    line.style.background = "var(--stress-high)";
+    line.style.animation = "vibrate 0.1s infinite";
+    line.style.height = "10px";
+    label.innerText = "SOBRECARGA CRÍTICA";
+  }
+}
+
+function salvar(){
+  let checks = [];
+  for(let i=1; i<=4; i++) checks.push(document.getElementById("s"+i).checked);
+  localStorage.setItem("data_6", JSON.stringify({
+    nivel: document.getElementById("inputStress").value,
+    itens: checks
+  }));
+}
+
+window.onload = function(){
+  let dados = JSON.parse(localStorage.getItem("data_6"));
+  if(dados){
+    document.getElementById("inputStress").value = dados.nivel;
+    atualizarStress();
+    dados.itens.forEach((c, i) => { document.getElementById("s"+(i+1)).checked = c; });
+  } else {
+    atualizarStress();
+  }
+}
+
+function enviar(){
+  let v = document.getElementById("inputStress").value;
+  let realizados = [];
+  let labels = ["Exercício", "Lista", "Pausa", "Oração"];
+  for(let i=1; i<=4; i++) if(document.getElementById("s"+i).checked) realizados.push(labels[i-1]);
+
+  let msg = `*RELATÓRIO CLÍNICO (6.html) - STRESS*\n*Nível de Tensão:* ${v}/10\n*Concluído:* ${realizados.join(", ") || "Nenhum"}\n*Data:* ${new Date().toLocaleString()}`;
+  window.open(`https://wa.me/5566984666186?text=${encodeURIComponent(msg)}`, "_blank");
+}
+</script>
+
+</body>
+</html>

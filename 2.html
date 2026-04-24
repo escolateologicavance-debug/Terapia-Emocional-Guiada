@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Ansiedade - GestãoEmocional</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --primary: #0b3d91;
+    --bg: #f0f4f8;
+    --text: #2c3e50;
+    --accent: #5dade2;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h2 { color: var(--primary); margin-bottom: 5px; }
+  .subtitle { font-size: 0.9em; margin-bottom: 20px; color: #555; }
+
+  .card {
+    background: #fff;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+  }
+
+  /* Animação do Guia de Respiração */
+  .breathing-container {
+    text-align: center;
+    padding: 30px 0;
+  }
+
+  #circle-guide {
+    width: 100px;
+    height: 100px;
+    background: var(--primary);
+    border-radius: 50%;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    /* A animação será controlada pelo JS para precisão */
+    transition: all 4s ease-in-out;
+  }
+
+  .expanding {
+    transform: scale(1.6);
+    box-shadow: 0 0 0 20px rgba(11, 61, 145, 0.2);
+  }
+
+  .btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .range-container { margin: 20px 0; }
+  input[type=range] { width: 100%; }
+
+  .label-list { text-align: left; font-size: 0.95em; line-height: 1.6; }
+  .label-list b { color: var(--primary); }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #e1e8f0;
+    border-radius: 5px;
+    margin: 3px;
+    font-size: 0.85em;
+  }
+</style>
+</head>
+<body>
+
+<h2>Ansiedade</h2>
+<p class="subtitle">Ajustando a Saúde Emocional</p>
+
+<div class="card">
+  <p><b>Como você "está" agora? (0 a 10)</b></p>
+  <div class="range-container">
+    <input type="range" min="0" max="10" value="5" id="nivel" oninput="atualizar()">
+    <div style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 5px;">
+      <span>Calma</span>
+      <span id="valor">5</span>
+      <span>Hiperativação</span>
+    </div>
+  </div>
+</div>
+
+<div class="card breathing-container">
+  <p><b>Intervenção: Desaceleração Guiada</b></p>
+  <p style="font-size: 0.9em; color: #666;">"Aquietai-vos e sabei..."</p>
+  
+  <div id="circle-guide">Aguarde</div>
+  <p id="respTexto">Pronto para começar?</p>
+  
+  <button class="btn" id="btnRespira" onclick="iniciarRespiracao()">Iniciar Ciclo de Paz</button>
+</div>
+
+<div class="card">
+  <p><b>Análise da Hiperativação</b></p>
+  <div class="label-list">
+    <p>O que você sente não é quem você <i>é</i>, mas como você <i>está</i>. A ansiedade é um excesso de futuro no presente.</p>
+    <b>Sinais de Alerta:</b><br>
+    <span class="badge">Inquietação Motora</span>
+    <span class="badge">Taquicardia</span>
+    <span class="badge">Ruminação Mental</span>
+    <span class="badge">Tensão Muscular</span>
+  </div>
+</div>
+
+<div class="card">
+  <p><b>Ajuste de Rota</b></p>
+  <div class="label-list">
+    <p>1. <b>Fisiológico:</b> Reduza cafeína e telas. O corpo precisa de descanso para a alma processar.</p>
+    <p>2. <b>Cognitivo:</b> Este medo é um fato real ou uma suposição antecipada?</p>
+    <p>3. <b>Espiritual:</b> Entregue a gestão do amanhã. Alinhe seu Corpo, Alma e Espírito hoje, com gratidão.</p>
+  </div>
+</div>
+
+<div style="width: 100%; max-width: 400px;">
+  <button class="btn" onclick="enviar()" style="background: #25d366;">Relatar ao Terapeuta</button>
+  <button class="btn" onclick="window.location.href='1.html'" style="background: #7f8c8d; margin-bottom: 50px;">Voltar ao Menu</button>
+</div>
+
+<script>
+function atualizar(){
+  let valor = document.getElementById("nivel").value;
+  document.getElementById("valor").innerText = valor;
+}
+
+function iniciarRespiracao(){
+  const circulo = document.getElementById("circle-guide");
+  const texto = document.getElementById("respTexto");
+  const btn = document.getElementById("btnRespira");
+  
+  btn.style.display = "none";
+  let ciclo = 0;
+
+  function executar() {
+    // Inspirar
+    circulo.classList.add("expanding");
+    circulo.innerText = "INSPIRE";
+    texto.innerText = "Sinta o ar trazendo clareza...";
+    
+    setTimeout(() => {
+      // Segurar
+      circulo.innerText = "SEGURE";
+      
+      setTimeout(() => {
+        // Expirar
+        circulo.classList.remove("expanding");
+        circulo.innerText = "EXPIRE";
+        texto.innerText = "Solte as preocupações do amanhã...";
+      }, 3000);
+      
+    }, 4000);
+  }
+
+  executar();
+  setInterval(executar, 11000); // Ciclo completo de 11 segundos
+}
+
+function enviar(){
+  let nivel = document.getElementById("nivel").value;
+  let data = new Date().toLocaleString('pt-BR');
+  let msg = `*Relatório de Estar Emocional*\n*Paciente:* [Nome]\n*Estado:* Ansiedade\n*Nível:* ${nivel}/10\n*Data:* ${data}\n\n_Bem Estar Emocional para buscar a paz._`;
+  let url = `https://wa.me/5566984666186?text=${encodeURIComponent(msg)}`;
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>

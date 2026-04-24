@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>3.html</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --dark-neutral: #2c3e50;
+    --spirit-blue: #0b3d91;
+    --bg: #eceff1;
+    --card-white: #ffffff;
+  }
+
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: #333; margin: 0; padding: 20px; }
+  h2 { color: var(--dark-neutral); text-align: center; margin-bottom: 5px; }
+  .tagline { font-size: 0.9em; color: #666; text-align: center; margin-bottom: 20px; }
+
+  .card {
+    background: var(--card-white);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+
+  /* Bateria de Energia */
+  .energy-container { text-align: center; }
+  #battery-frame {
+    width: 100%; height: 35px; border: 3px solid var(--dark-neutral);
+    border-radius: 8px; position: relative; margin: 15px 0; background: #ddd;
+  }
+  #battery-level {
+    height: 100%; width: 30%; background: linear-gradient(90deg, #555, var(--spirit-blue));
+    transition: width 0.5s ease;
+  }
+
+  .clinical-info { font-size: 1.05em; line-height: 1.6; color: #333; }
+  .clinical-info b { color: var(--spirit-blue); display: block; margin-bottom: 5px; }
+  .section-divider { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
+
+  .check-item { display: flex; align-items: center; margin: 15px 0; font-size: 1.1em; font-weight: 500; }
+  .check-item input { width: 24px; height: 24px; margin-right: 15px; cursor: pointer; }
+
+  .btn {
+    width: 100%; padding: 18px; margin-top: 10px; border: none; border-radius: 10px;
+    font-size: 16px; font-weight: bold; cursor: pointer;
+  }
+  .btn-send { background: #128c7e; color: white; }
+  .btn-back { background: #78909c; color: white; }
+</style>
+</head>
+
+<body>
+
+<h2>Depressão</h2>
+<p class="tagline">Alinhamento: Corpo, Alma e Espírito</p>
+
+<div class="card energy-container">
+  <p><b>Nível de Disposição Física e Mental</b></p>
+  <div id="battery-frame"><div id="battery-level"></div></div>
+  <input type="range" min="0" max="10" value="3" id="inputEnergia" style="width:100%" oninput="atualizarEnergia()">
+  <p>Status: <span id="txtStatus">Inércia</span> (<span id="valNum">3</span>/10)</p>
+</div>
+
+<div class="card">
+  <p style="font-size: 1.2em; font-weight: bold; color: var(--spirit-blue); margin-top: 0;">Diretrizes para Reativação do Ser:</p>
+  
+  <div class="clinical-info">
+    <p>
+      <b>1. Corpo (Química da Vida):</b> 
+      A depressão atua como uma inflamação sistêmica que "sequestra" sua energia. O movimento é o antídoto biológico primário. Ao caminhar ou se exercitar, você força o cérebro a liberar <b>Dopamina</b> (motivação) e <b>Serotonina</b> (estabilização do humor). 
+      <br><i>Ação:</i> Se a inércia estiver pesada, não espere a vontade vir — ela não virá agora. Chame um parceiro de caminhada, combine um horário fixo e use o compromisso social como alavanca. O movimento precede a melhora.
+    </p>
+
+    <div class="section-divider"></div>
+
+    <p>
+      <b>2. Alma (O Labirinto da Mente):</b> 
+      Sob dor, sua mente torna-se uma mentirosa habilidosa. Ela cria pensamentos automáticos de autocrítica e desamparo que parecem verdades absolutas, mas são apenas sintomas da patologia. 
+      <br><i>Ação:</i> Questione cada pensamento punitivo. Se você não diria isso a um amigo, não aceite que sua mente diga a você. Ocupe sua psique com a organização do ambiente imediato; a ordem externa ajuda a mitigar o caos interno.
+    </p>
+
+    <div class="section-divider"></div>
+
+    <p>
+      <b>3. Espiritual (Alinhamento e Propósito):</b> 
+      O espírito é a âncora que impede o naufrágio total. A depressão tenta cortar o fio da esperança, fazendo o amanhã parecer inexistente. 
+      <br><i>Ação:</i> Pratique a gratidão não como um sentimento (que pode estar ausente), mas como uma disciplina intelectual. Alinhe seu espírito com o Criador através da oração honesta — despeje a dor, mas reafirme a confiança. O alinhamento aqui devolve o sentido que a depressão tentou roubar.
+    </p>
+  </div>
+</div>
+
+<div class="card">
+  <p><b>Micro-Vitórias (Ação Mínima Viável):</b></p>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="c1"><label>Exposição à luz solar (15 min)</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="c2"><label>Higiene pessoal completa</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="c3"><label>Movimento corporal ou caminhada</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="c4"><label>Oração / Alinhamento Espiritual</label></div>
+</div>
+
+<button class="btn btn-send" onclick="enviar()">Relatar Status ao Terapeuta</button>
+<button class="btn btn-back" onclick="window.location.href='1.html'">Voltar ao Menu</button>
+
+<script>
+function atualizarEnergia(){
+  let v = document.getElementById("inputEnergia").value;
+  document.getElementById("valNum").innerText = v;
+  document.getElementById("battery-level").style.width = (v*10) + "%";
+  
+  let status = "Inércia";
+  if(v > 4) status = "Funcionalidade Média";
+  if(v > 7) status = "Plenitude de Ação";
+  document.getElementById("txtStatus").innerText = status;
+}
+
+function salvar(){
+  let checks = [];
+  for(let i=1; i<=4; i++){
+    checks.push(document.getElementById("c"+i).checked);
+  }
+  localStorage.setItem("data_3", JSON.stringify({
+    energia: document.getElementById("inputEnergia").value,
+    atividades: checks
+  }));
+}
+
+window.onload = function(){
+  let dados = JSON.parse(localStorage.getItem("data_3"));
+  if(dados){
+    document.getElementById("inputEnergia").value = dados.energia;
+    atualizarEnergia();
+    dados.atividades.forEach((check, i) => {
+      document.getElementById("c"+(i+1)).checked = check;
+    });
+  }
+}
+
+function enviar(){
+  let v = document.getElementById("inputEnergia").value;
+  let status = document.getElementById("txtStatus").innerText;
+  let labels = ["Sol", "Higiene", "Movimento", "Espiritual"];
+  let realizados = [];
+  
+  for(let i=1; i<=4; i++){
+    if(document.getElementById("c"+i).checked) realizados.push(labels[i-1]);
+  }
+
+  let msg = `*RELATÓRIO CLÍNICO (3.html)*\n*Energia:* ${v}/10 (${status})\n*Concluído:* ${realizados.join(", ") || "Nenhum"}\n*Data:* ${new Date().toLocaleString()}`;
+  window.open(`https://wa.me/5566984666186?text=${encodeURIComponent(msg)}`, "_blank");
+}
+</script>
+
+</body>
+</html>

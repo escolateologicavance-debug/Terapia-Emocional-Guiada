@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>4.html - Burnout</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --emergency-red: #c0392b;
+    --warning-orange: #d35400;
+    --dark-slate: #2c3e50;
+    --card-white: #ffffff;
+  }
+
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; color: #333; margin: 0; padding: 20px; }
+  h2 { color: var(--emergency-red); text-align: center; margin-bottom: 5px; }
+  .tagline { font-size: 0.9em; color: #666; text-align: center; margin-bottom: 20px; }
+
+  .card {
+    background: var(--card-white);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  /* Animação de Pressão */
+  .pressure-gauge {
+    width: 150px; height: 150px; border-radius: 50%;
+    margin: 20px auto; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; border: 8px solid #ddd;
+    transition: all 0.4s ease; position: relative;
+  }
+  .pressure-val { font-size: 2.5em; font-weight: bold; }
+  
+  /* Efeito de Pulsação quando o nível é alto */
+  @keyframes pulse-warning {
+    0% { box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.4); }
+    70% { box-shadow: 0 0 0 20px rgba(192, 57, 43, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(192, 57, 43, 0); }
+  }
+
+  .clinical-info { font-size: 1.05em; line-height: 1.6; color: #333; text-align: left; }
+  .clinical-info b { color: var(--emergency-red); display: block; margin-bottom: 5px; }
+  .section-divider { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
+
+  .check-item { display: flex; align-items: center; margin: 15px 0; font-size: 1.1em; }
+  .check-item input { width: 24px; height: 24px; margin-right: 15px; }
+
+  .btn {
+    width: 100%; padding: 18px; margin-top: 10px; border: none; border-radius: 10px;
+    font-size: 16px; font-weight: bold; cursor: pointer;
+  }
+  .btn-send { background: #128c7e; color: white; }
+  .btn-back { background: #7f8c8d; color: white; }
+</style>
+</head>
+
+<body>
+
+<h2>Burnout</h2>
+<p class="tagline">Alinhamento: Corpo, Alma e Espírito</p>
+
+<div class="card" style="text-align: center;">
+  <p><b>Pressão Psicológica Percebida</b></p>
+  <div id="gauge" class="pressure-gauge">
+    <span class="pressure-val" id="displayVal">5</span>
+    <span style="font-size: 0.8em;">PSI INTERNO</span>
+  </div>
+  <input type="range" min="0" max="10" value="5" id="inputPressao" style="width:100%" oninput="atualizarPressao()">
+</div>
+
+<div class="card">
+  <p style="font-size: 1.2em; font-weight: bold; color: var(--emergency-red); margin-top: 0;">Diagnóstico de Exaustão:</p>
+  
+  <div class="clinical-info">
+    <p>
+      <b>1. Corpo (Esgotamento Fisiológico):</b> 
+      O Burnout não é apenas cansaço; é o colapso do sistema de resposta ao estresse (Eixo HPA). O excesso de <b>Cortisol</b> cronificado destrói o sono restaurador e gera sintomas psicossomáticos como taquicardia e dores musculares constantes.
+      <br><i>Ação:</i> O corpo entrou em modo de sobrevivência. É mandatório o desligamento total de estímulos após o expediente. A recuperação biológica exige descanso sem telas para que o sistema parassimpático possa atuar.
+    </p>
+
+    <div class="section-divider"></div>
+
+    <p>
+      <b>2. Alma (Crise de Identidade):</b> 
+      Aqui ocorre a "despersonalização". Você começa a tratar pessoas como objetos e o trabalho como um fardo sem sentido. A alma se sente vazia porque a identidade foi fundida apenas com a produtividade.
+      <br><i>Ação:</i> Recupere seus limites. Você é um ser humano, não um recurso de produção. Aprenda a dizer "não" para demandas que violam seu tempo de recuperação mental. Organize sua rotina para que o trabalho ocupe apenas o espaço que lhe cabe.
+    </p>
+
+    <div class="section-divider"></div>
+
+    <p>
+      <b>3. Espiritual (O Descanso Sagrado):</b> 
+      O espírito adoece quando perde a noção do <i>Shabbat</i> — a pausa necessária. A obsessão pelo "fazer" abafa a conexão com o Criador. O esgotamento espiritual vem da tentativa de carregar o mundo nas costas, ignorando que o controle final não é seu.
+      <br><i>Ação:</i> Pratique a entrega. Reserve momentos de silêncio absoluto para realinhar seus valores. A gratidão aqui serve para lembrar que sua provisão e valor não dependem da sua exaustão, mas da sua filiação espiritual.
+    </p>
+  </div>
+</div>
+
+<div class="card">
+  <p><b>Protocolo de Emergência:</b></p>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="t1"><label>Desconexão Digital Total (1h+)</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="t2"><label>Identificação de gatilhos de estresse</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="t3"><label>Pausa para respiração diafragmática</label></div>
+  <div class="check-item"><input type="checkbox" onchange="salvar()" id="t4"><label>Oração de entrega e repouso</label></div>
+</div>
+
+<button class="btn btn-send" onclick="enviar()">Enviar Diagnóstico ao Terapeuta</button>
+<button class="btn btn-back" onclick="window.location.href='1.html'">Voltar ao Menu</button>
+
+<script>
+function atualizarPressao(){
+  let v = document.getElementById("inputPressao").value;
+  document.getElementById("displayVal").innerText = v;
+  let g = document.getElementById("gauge");
+  
+  // Muda cores e animações baseadas no nível
+  if(v <= 4) {
+    g.style.borderColor = "#27ae60";
+    g.style.color = "#27ae60";
+    g.style.animation = "none";
+  } else if(v <= 7) {
+    g.style.borderColor = "#f39c12";
+    g.style.color = "#f39c12";
+    g.style.animation = "none";
+  } else {
+    g.style.borderColor = "#c0392b";
+    g.style.color = "#c0392b";
+    g.style.animation = "pulse-warning 1s infinite";
+  }
+}
+
+function salvar(){
+  let checks = [];
+  for(let i=1; i<=4; i++) checks.push(document.getElementById("t"+i).checked);
+  localStorage.setItem("data_4", JSON.stringify({
+    pressao: document.getElementById("inputPressao").value,
+    itens: checks
+  }));
+}
+
+window.onload = function(){
+  let dados = JSON.parse(localStorage.getItem("data_4"));
+  if(dados){
+    document.getElementById("inputPressao").value = dados.pressao;
+    atualizarPressao();
+    dados.itens.forEach((c, i) => { document.getElementById("t"+(i+1)).checked = c; });
+  } else {
+    atualizarPressao();
+  }
+}
+
+function enviar(){
+  let v = document.getElementById("inputPressao").value;
+  let status = v > 7 ? "CRÍTICO" : (v > 4 ? "ALERTA" : "ESTÁVEL");
+  let realizados = [];
+  let labels = ["Desconexão", "Gatilhos", "Respiração", "Oração"];
+  for(let i=1; i<=4; i++) if(document.getElementById("t"+i).checked) realizados.push(labels[i-1]);
+
+  let msg = `*RELATÓRIO CLÍNICO (4.html) - BURNOUT*\n*Pressão Interna:* ${v}/10 (${status})\n*Concluído:* ${realizados.join(", ") || "Nenhum"}\n*Data:* ${new Date().toLocaleString()}`;
+  window.open(`https://wa.me/5566984666186?text=${encodeURIComponent(msg)}`, "_blank");
+}
+</script>
+
+</body>
+</html>
