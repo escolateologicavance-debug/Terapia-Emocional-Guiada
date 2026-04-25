@@ -1,4 +1,4 @@
-const CACHE_NAME = "terapia-app-v3";
+const CACHE_NAME = "terapia-app-v4";
 
 const urlsToCache = [
   "index.html",
