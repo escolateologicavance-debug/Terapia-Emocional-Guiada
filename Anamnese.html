@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anamnese - Gilberto Moreira</title>
+    <style>
+        :root { --primary: #1a2a6c; --alert: #d9534f; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #333; margin: 0; padding: 15px; }
+        .header { text-align: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
+        .header img { width: 120px; }
+        .section { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); margin-bottom: 15px; }
+        h3 { color: var(--primary); font-size: 1em; border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 15px; }
+        label { display: block; margin-top: 12px; font-weight: bold; font-size: 0.85em; }
+        input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        
+        .terms-container { display: flex; align-items: flex-start; gap: 10px; background: #eee; padding: 12px; border-radius: 8px; margin-top: 20px; }
+        .terms-container input { width: auto; margin-top: 3px; }
+        .terms-text { font-size: 0.8em; line-height: 1.4; }
+
+        .btn-audio { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: bold; width: 100%; margin: 10px 0; }
+        .submit-btn { width: 100%; background: #28a745; color: white; padding: 15px; border: none; border-radius: 8px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .range-label { display: flex; justify-content: space-between; font-size: 0.8em; color: #666; }
+    </style>
+</head>
+<body>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+
+    <div class="header">
+        <img src="logo-192.png" alt="Sincroterapia">
+        <h2 style="margin: 5px 0;">ANAMNESE</h2>
+        <strong style="color: var(--primary);">Gilberto Moreira - Sincroterapeuta</strong>
+        <p style="font-size: 0.85em; margin-top: 5px;">CBO 2515-50 | Sincroterapia Bíblica</p>
+        
+        <button class="btn-audio" onclick="toggleAudio()" id="btnAudio">▶️ OUVIR ORIENTAÇÃO</button>
+        <audio id="audioPlayer" src="1-audio.mp3"></audio> 
+    </div>
+
+    <form id="anamneseForm">
+        <div class="section">
+            <h3>I. Dados de Perícia Clínica</h3>
+            <label>Nome Completo:</label>
+            <input type="text" name="nome" required>
+            
+            <label>Uso de Medicações (Psicotrópicos/Ansiolíticos):</label>
+            <textarea name="medicacoes" rows="2" placeholder="Nome e dosagem..."></textarea>
+
+            <label>Histórico de Desparasitação (Antiparasitário):</label>
+            <select name="antiparasitario" required>
+                <option value="">Selecione...</option>
+                <option value="Menos de 6 meses">Fez uso há menos de 6 meses</option>
+                <option value="Mais de 1 ano">Fez uso há mais de 1 ano</option>
+                <option value="Nunca fez">Não se recorda/Nunca fez</option>
+            </select>
+            <p style="font-size: 0.75em; color: var(--alert);">*Fator crítico para Reação Cerebral e Humor.</p>
+        </div>
+
+        <div class="section">
+            <h3>II. Linha de Base (Agora)</h3>
+            <label>Qualidade do Sono:</label>
+            <input type="range" min="0" max="10" name="sono" id="sonoRange">
+            <div class="range-label"><span>Péssima (0)</span><span>Ótima (10)</span></div>
+
+            <label>Cômodo Chave (Qual Cômodo em Sua Residência você costuma limpar e organizar MENOS?):</label>
+            <input type="text" name="comodo_chave" placeholder="Ex: Escritório, Gaveta X...">
+        </div>
+
+        <div class="terms-container">
+            <input type="checkbox" id="aceite" required>
+            <div class="terms-text">
+                <strong>Temos e Condições:</strong> Entendo que a Sincroterapia é uma terapia de Gestão, Manutenção Emocional e Comportamental. Não receitamos remédios. Não fazemos intervenção medicamentosa e Nunca pedimos o abandono de Tratamento Psiquiátrico ou Neurológico. <br>
+                <em>Atenção: Não pedimos Pix nem valores ou orientamos fora deste app/WhatsApp: (66) 98466-6186.</em>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">ENVIAR PARA O SINCROTERAPEUTA</button>
+    </form>
+  <button class="btn" onclick="window.location.href='1.html'" style="background: #7f8c8d; margin-bottom: 50px;">Voltar ao Menu</button>
+</div>
+
+<script>
+        // Função para o navegador LER o texto da tela (Sintetizador)
+let synth = window.speechSynthesis;
+let utterance;
+
+function toggleAudio() {
+    // Se estiver lendo, ele para.
+    if (synth.speaking) {
+        synth.cancel();
+        document.getElementById('btnAudio').innerText = "▶️ OUVIR ORIENTAÇÃO";
+        return;
+    }
+
+    // O que o app vai ler (pegando os textos das seções)
+    const texto = "Anamnese Crítica. Gilberto Moreira, Sincroterapeuta. Por favor, preencha seus dados de perícia clínica, incluindo medicações e histórico de desparasitação. Lembre-se do contrato de coerência.";
+    
+    utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = 'pt-BR';
+    utterance.rate = 1.0; // Velocidade da voz
+
+    utterance.onend = () => {
+        document.getElementById('btnAudio').innerText = "▶️ OUVIR ORIENTAÇÃO";
+    };
+
+    synth.speak(utterance);
+    document.getElementById('btnAudio').innerText = "⏸️ PARAR ORIENTAÇÃO";
+}
+
+// O restante da função de envio (WhatsApp) permanece igual...
+document.getElementById('anamneseForm').onsubmit = function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    let mensagem = `*ANAMNESE - SINCROTERAPIA*%0A*Paciente:* ${formData.get('nome')}%0A*Remédios:* ${formData.get('medicacoes')}%0A*Desparasitação:* ${formData.get('antiparasitario')}%0A*Sono:* ${formData.get('sono')}/10%0A*Caos Geográfico:* ${formData.get('comodo_chave')}`;
+    const url = `https://api.whatsapp.com/send?phone=5566984666186&text=${mensagem}`;
+    window.open(url, '_blank');
+    setTimeout(() => { window.location.href = '2.html'; }, 800);
+};
+
+    </script>
+</body>
+</html>
