@@ -9,6 +9,7 @@ const urlsToCache = [
   "5.html",
   "6.html",
   "7.html",
+  "Anamnese.html",
 
   "logo-192.png",
   "logo-512.png"
